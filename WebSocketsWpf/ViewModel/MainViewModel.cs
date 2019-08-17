@@ -16,6 +16,17 @@ namespace WebSocketsWpf.ViewModel
     // "ws://localhost:5000/ws"
     public string Uri { get; set; }
 
+    private bool connected;
+    public bool Connected
+    {
+      get { return connected;}
+      set
+      {
+        connected = value;
+        OnPropertyChanged();
+      }
+    }
+
     private string login;
     public string Login {
       get { return login; }
@@ -23,10 +34,12 @@ namespace WebSocketsWpf.ViewModel
         if (!String.IsNullOrWhiteSpace(value))
         {
           login = value;
+          Connected = true;
         }
         else
         {
           login = String.Empty;
+          Connected = false;
         }
       }
     }
