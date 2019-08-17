@@ -1,0 +1,98 @@
+﻿<Window x:Class="WebSocketsWpf.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebSocketsWpf"
+        Title="OpenChat" Height="300" Width="500">
+
+  <Window.Resources>
+    <Style TargetType="{x:Type TextBlock}">
+      <Setter Property="Margin" Value="3"/>
+      <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="{x:Type Button}">
+      <Setter Property="Margin" Value="3"/>
+    </Style>
+    <Style TargetType="{x:Type TextBox}">
+      <Setter Property="Margin" Value="3"/>
+      <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="{x:Type ListBox}">
+      <Setter Property="Margin" Value="3"/>
+    </Style>
+</Window.Resources>
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="3*"/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+      <RowDefinition Height="8*"/>
+      <RowDefinition Height="2*"/>
+    </Grid.RowDefinitions>
+    
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="8*"/>
+        <ColumnDefinition Width="2*"/>
+      </Grid.ColumnDefinitions>
+
+      <TextBlock
+        Text="Uri:" 
+        HorizontalAlignment="Left"/>
+      <TextBox
+        Grid.Column="1"
+        Name="uriBox"
+        Text="{Binding Uri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+      <Button
+        Name="btnSaveUri"
+        Grid.Column="2" 
+        Content="Save" 
+        Click="BtnSaveUri_Click"/>
+   </Grid>
+
+  
+    <ListBox 
+      Name="chatBox"
+      Grid.Row="1"
+      ItemsSource="{Binding Messages}"/>
+    <TextBox 
+      Name="messageBox"
+      Grid.Row="2" 
+      AcceptsReturn="True" 
+      Text="{Binding Message}"/>
+    <Button 
+      Name="btnSendMessages"
+      Grid.Row="2"
+      Grid.Column="1" 
+      IsEnabled="False"  
+      Click="BtnSendMessages_Click"
+      Content="Send"/>
+
+    <StackPanel Grid.Column="1" Grid.Row="1">
+      <TextBlock
+        HorizontalAlignment="Left" 
+        Text="Login:"/>
+      <TextBox 
+        Name="loginBox" 
+        Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+      <Button 
+        Name ="btnConnect" 
+        IsEnabled="{Binding Connected, Mode=TwoWay}" 
+        Click="Connect_Click"
+        Content="Connect"/>
+      <TextBlock 
+        Name="status"
+        TextWrapping="Wrap"
+        HorizontalAlignment="Left"
+        Text="{Binding Status, Mode=TwoWay}"/>
+    </StackPanel>
+
+  </Grid>
+
+</Window>
